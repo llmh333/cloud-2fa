@@ -1,5 +1,8 @@
 package org.example.cloud2fa.service.impl;
 
+import java.security.SecureRandom;
+import java.util.Base64;
+
 import org.example.cloud2fa.constant.MessageKey;
 import org.example.cloud2fa.constant.enums.AccountStatusEnum;
 import org.example.cloud2fa.constant.enums.RoleEnum;
@@ -68,10 +71,14 @@ public class AuthServiceImpl implements AuthService {
                new String[] { requestDto.getPhone() });
       }
 
+      byte[] salt = new byte[32];
+      new SecureRandom().nextBytes(salt);
+
       User user = User.builder()
             .username(requestDto.getUsername())
             .password(passwordEncoder.encode(requestDto.getPassword()))
             .masterPassword(passwordEncoder.encode(requestDto.getMasterPassword()))
+            .encryptedSalt(Base64.getEncoder().encodeToString(salt))
             .email(requestDto.getEmail())
             .phone(requestDto.getPhone())
             .role(RoleEnum.USER)

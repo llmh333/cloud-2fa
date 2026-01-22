@@ -34,7 +34,7 @@ public class User extends DateAuditing {
    @Column(nullable = false)
    private String password;
 
-   @Column
+   @Column(nullable = false)
    private String masterPassword;
 
    @Column(nullable = false, unique = true)
@@ -42,6 +42,9 @@ public class User extends DateAuditing {
 
    @Column(nullable = false, unique = true)
    private String phone;
+
+   @Column(nullable = false, columnDefinition = "TEXT")
+   private String encryptedSalt;
 
    @Column(nullable = false)
    private RoleEnum role;
