@@ -15,7 +15,9 @@ import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.example.cloud2fa.service.EncryptionService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class EncryptionServiceImpl implements EncryptionService {
    private static final String ENCRYPT_ALGO = "AES/GCM/NoPadding";
    private static final int TAG_LENGTH_BIT = 128; // Độ dài thẻ xác thực
@@ -28,12 +30,14 @@ public class EncryptionServiceImpl implements EncryptionService {
    private final SecureRandom secureRandom = new SecureRandom();
 
    @Override
-   public String encrypt(String rawSecret, String rawMasterPassword, byte[] salt) {
+   public String encrypt(String rawSecret, String rawMasterPassword, String encryptedSaltBase64) {
       try {
+         byte[] decodedBytes = Base64.getDecoder().decode(encryptedSaltBase64);
+
          byte[] iv = new byte[IV_LENGTH_BYTE];
          secureRandom.nextBytes(iv);
 
-         SecretKey secretKey = generateSecretKey(rawMasterPassword, salt);
+         SecretKey secretKey = generateSecretKey(rawMasterPassword, decodedBytes);
 
          Cipher cipher = Cipher.getInstance(ENCRYPT_ALGO);
          cipher.init(Cipher.ENCRYPT_MODE, secretKey, new GCMParameterSpec(TAG_LENGTH_BIT, iv));
@@ -54,16 +58,19 @@ public class EncryptionServiceImpl implements EncryptionService {
    @Override
    public String decrypt(String encryptedSecret, String rawMasterPassword, String encryptedSaltBase64) {
       try {
-         byte[] decodedBytes = Base64.getDecoder().decode(encryptedSaltBase64);
+         byte[] saltBytes = Base64.getDecoder().decode(encryptedSaltBase64);
 
-         ByteBuffer byteBuffer = ByteBuffer.wrap(decodedBytes);
+         byte[] encryptedSecretBytes = Base64.getDecoder().decode(encryptedSecret);
+
+         ByteBuffer byteBuffer = ByteBuffer.wrap(encryptedSecretBytes);
+
          byte[] iv = new byte[IV_LENGTH_BYTE];
          byteBuffer.get(iv);
 
          byte[] cipherText = new byte[byteBuffer.remaining()];
          byteBuffer.get(cipherText);
 
-         SecretKey secretKey = generateSecretKey(rawMasterPassword, decodedBytes);
+         SecretKey secretKey = generateSecretKey(rawMasterPassword, saltBytes);
 
          Cipher cipher = Cipher.getInstance(ENCRYPT_ALGO);
          cipher.init(Cipher.DECRYPT_MODE, secretKey, new GCMParameterSpec(TAG_LENGTH_BIT, iv));
@@ -73,7 +80,7 @@ public class EncryptionServiceImpl implements EncryptionService {
          return new String(plainText, StandardCharsets.UTF_8);
 
       } catch (GeneralSecurityException e) {
-         throw new RuntimeException("Giải mã thất bại. Có thể sai Master Password.", e);
+         throw new RuntimeException("Giải mã thất bại. Có thể sai Master Password hoặc dữ liệu hỏng.", e);
       }
    }
 

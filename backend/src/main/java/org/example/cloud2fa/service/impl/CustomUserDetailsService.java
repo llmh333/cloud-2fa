@@ -2,8 +2,8 @@ package org.example.cloud2fa.service.impl;
 
 import org.example.cloud2fa.constant.MessageKey;
 import org.example.cloud2fa.domain.entity.User;
-import org.example.cloud2fa.domain.repository.UserRepository;
 import org.example.cloud2fa.exception.NotFoundException;
+import org.example.cloud2fa.repository.UserRepository;
 import org.example.cloud2fa.security.UserPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

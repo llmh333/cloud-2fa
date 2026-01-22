@@ -12,9 +12,9 @@ import org.example.cloud2fa.domain.dto.response.TokenResponseDto;
 import org.example.cloud2fa.domain.dto.response.UserResponeDto;
 import org.example.cloud2fa.domain.entity.User;
 import org.example.cloud2fa.domain.mapper.UserMapper;
-import org.example.cloud2fa.domain.repository.UserRepository;
 import org.example.cloud2fa.exception.ConflictException;
 import org.example.cloud2fa.exception.UnauthorizedException;
+import org.example.cloud2fa.repository.UserRepository;
 import org.example.cloud2fa.security.JwtTokenProvider;
 import org.example.cloud2fa.security.UserPrincipal;
 import org.example.cloud2fa.service.AuthService;
@@ -78,7 +78,7 @@ public class AuthServiceImpl implements AuthService {
             .username(requestDto.getUsername())
             .password(passwordEncoder.encode(requestDto.getPassword()))
             .masterPassword(passwordEncoder.encode(requestDto.getMasterPassword()))
-            .encryptedSalt(Base64.getEncoder().encodeToString(salt))
+            .encryptionSalt(Base64.getEncoder().encodeToString(salt))
             .email(requestDto.getEmail())
             .phone(requestDto.getPhone())
             .role(RoleEnum.USER)

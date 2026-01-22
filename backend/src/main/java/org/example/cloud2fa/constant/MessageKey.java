@@ -26,6 +26,14 @@ public class MessageKey {
          public static final String MASTER_PASSWORD = "invalid.user.master.password";
          public static final String EMAIL = "invalid.user.email";
          public static final String PHONE = "invalid.user.phone";
+
+         public static final String NOT_BLANK = "validation.not.blank";
+         public static final String MIN = "validation.min";
+      }
+
+      public static class TotpAccount {
+         public static final String NOT_FOUND = "totp.account.not.found";
+         public static final String FORBIDDEN = "totp.account.forbidden";
       }
    }
 }

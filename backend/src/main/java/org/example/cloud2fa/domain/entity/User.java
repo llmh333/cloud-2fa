@@ -48,7 +48,7 @@ public class User extends DateAuditing {
    private String phone;
 
    @Column(nullable = false, columnDefinition = "TEXT")
-   private String encryptedSalt;
+   private String encryptionSalt;
 
    @Column(nullable = false)
    private RoleEnum role;

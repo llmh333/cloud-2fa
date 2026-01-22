@@ -11,4 +11,13 @@ public class UrlConstant {
       public static final String VERIFY_FORGOT_PASSWORD = FORGOT_PASSWORD + "/verify";
       public static final String REFRESH_TOKEN = PREFIX + "/refresh-token";
    }
+
+   public static class Totp {
+      public static final String PREFIX = "/totps";
+      public static final String ADD_SECRET_KEY = PREFIX;
+      public static final String GENERATE = PREFIX + "/generate";
+      public static final String SYNC_DATA = PREFIX + "/sync/data";
+      public static final String UPDATE = PREFIX + "/{id}";
+      public static final String DELETE = PREFIX + "/{id}";
+   }
 }

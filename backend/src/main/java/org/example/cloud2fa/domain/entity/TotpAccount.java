@@ -1,5 +1,7 @@
 package org.example.cloud2fa.domain.entity;
 
+import org.hibernate.annotations.UuidGenerator;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -23,6 +25,7 @@ import lombok.Setter;
 public class TotpAccount {
 
    @Id
+   @UuidGenerator(style = UuidGenerator.Style.VERSION_7)
    private String id;
 
    @ManyToOne(fetch = FetchType.LAZY)

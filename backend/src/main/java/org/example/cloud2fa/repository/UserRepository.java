@@ -1,4 +1,4 @@
-package org.example.cloud2fa.domain.repository;
+package org.example.cloud2fa.repository;
 
 import java.util.Optional;
 
