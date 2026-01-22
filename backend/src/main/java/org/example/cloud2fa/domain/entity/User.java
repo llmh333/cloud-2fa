@@ -1,13 +1,17 @@
 package org.example.cloud2fa.domain.entity;
 
+import java.util.List;
+
 import org.example.cloud2fa.constant.enums.AccountStatusEnum;
 import org.example.cloud2fa.constant.enums.RoleEnum;
 import org.example.cloud2fa.domain.entity.common.DateAuditing;
 import org.hibernate.annotations.UuidGenerator;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -51,4 +55,7 @@ public class User extends DateAuditing {
 
    @Column(nullable = false)
    private AccountStatusEnum status;
+
+   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+   private List<TotpAccount> totpAccounts;
 }
