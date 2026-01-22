@@ -27,18 +27,18 @@ Sơ đồ tổng quan (Mermaid):
 
 ```mermaid
 flowchart LR
-  subgraph FE [Frontend]
-    A[React (Vite) SPA]
+  subgraph FE["Frontend"]
+    A["React (Vite) SPA"]
   end
 
-  subgraph BE [Backend]
-    B[Spring Boot REST API]
+  subgraph BE["Backend"]
+    B["Spring Boot REST API"]
     DB[(Database)]
   end
 
-  subgraph MISC
-    D[Docker / Docker Compose]
-    Auth[Auth (JWT / Session)]
+  subgraph MISC["Infrastructure"]
+    D["Docker / Docker Compose"]
+    Auth["Auth (JWT / Session)"]
   end
 
   A -- HTTPS --> B
