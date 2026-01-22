@@ -1,0 +1,12 @@
+.git
+.agent
+.idea
+.vscode
+*.log
+*.lock
+*.class
+*.jar
+*.war
+*.zip
+*.tar.gz
+*.tar

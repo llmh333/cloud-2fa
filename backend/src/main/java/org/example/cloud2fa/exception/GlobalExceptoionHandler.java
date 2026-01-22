@@ -17,12 +17,28 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import jakarta.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 @RestControllerAdvice
 @RequiredArgsConstructor
 @Slf4j
 public class GlobalExceptoionHandler {
    private final MessageSource messageSource;
+
+   @ExceptionHandler(MethodArgumentNotValidException.class)
+   @ResponseStatus(HttpStatus.BAD_REQUEST)
+   public ResponseEntity<?> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+      Map<String, String> result = new LinkedHashMap<>();
+      ex.getBindingResult().getAllErrors().forEach((error) -> {
+         String fieldName = ((FieldError) error).getField();
+         String messageKey = error.getDefaultMessage();
+         String errorMessage = messageSource.getMessage(Objects.requireNonNull(messageKey), null,
+               LocaleContextHolder.getLocale());
+         result.put(fieldName, errorMessage);
+      });
+      return ApiResponseUtil.error(HttpStatus.BAD_REQUEST, result);
+   }
 
    @ExceptionHandler(ConstraintViolationException.class)
    @ResponseStatus(HttpStatus.BAD_REQUEST)

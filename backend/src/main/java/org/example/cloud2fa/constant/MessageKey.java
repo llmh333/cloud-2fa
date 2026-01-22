@@ -19,5 +19,12 @@ public class MessageKey {
          public static final String EMAIL_EXISTS = "user.email.exists";
          public static final String PHONE_EXISTS = "user.phone.exists";
       }
+
+      public static class Valid {
+         public static final String USERNAME = "invalid.user.username";
+         public static final String PASSWORD = "invalid.user.password";
+         public static final String EMAIL = "invalid.user.email";
+         public static final String PHONE = "invalid.user.phone";
+      }
    }
 }

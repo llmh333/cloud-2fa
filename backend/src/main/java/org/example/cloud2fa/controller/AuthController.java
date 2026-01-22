@@ -2,7 +2,6 @@ package org.example.cloud2fa.controller;
 
 import org.example.cloud2fa.base.ApiResponseUtil;
 import org.example.cloud2fa.base.RestApiV1;
-import org.example.cloud2fa.base.RestData;
 import org.example.cloud2fa.constant.UrlConstant;
 import org.example.cloud2fa.domain.dto.request.LoginRequestDto;
 import org.example.cloud2fa.domain.dto.request.RegisterRequestDto;
@@ -26,7 +25,7 @@ public class AuthController {
    @PostMapping(UrlConstant.Auth.REGISTER)
    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequestDto requestDto) {
       UserResponeDto response = authService.register(requestDto);
-      return ApiResponseUtil.success(response);
+      return ApiResponseUtil.success(HttpStatus.CREATED, response);
    }
 
    @PostMapping(UrlConstant.Auth.LOGIN)
