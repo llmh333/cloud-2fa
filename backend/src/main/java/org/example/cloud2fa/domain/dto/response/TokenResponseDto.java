@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 public class TokenResponseDto {
 
    @Schema(description = "Token type", example = "Bearer", defaultValue = "Bearer")
+   @Builder.Default
    private String type = "Bearer";
 
    @Schema(description = "JWT access token for API authentication", example = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...")

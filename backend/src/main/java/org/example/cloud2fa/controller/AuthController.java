@@ -2,7 +2,6 @@ package org.example.cloud2fa.controller;
 
 import org.example.cloud2fa.base.ApiResponseUtil;
 import org.example.cloud2fa.base.RestApiV1;
-import org.example.cloud2fa.base.RestData;
 import org.example.cloud2fa.constant.UrlConstant;
 import org.example.cloud2fa.domain.dto.request.LoginRequestDto;
 import org.example.cloud2fa.domain.dto.request.RegisterRequestDto;
