@@ -23,6 +23,7 @@ public class MessageKey {
       public static class Valid {
          public static final String USERNAME = "invalid.user.username";
          public static final String PASSWORD = "invalid.user.password";
+         public static final String MASTER_PASSWORD = "invalid.user.master.password";
          public static final String EMAIL = "invalid.user.email";
          public static final String PHONE = "invalid.user.phone";
       }

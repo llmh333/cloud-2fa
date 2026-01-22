@@ -71,6 +71,7 @@ public class AuthServiceImpl implements AuthService {
       User user = User.builder()
             .username(requestDto.getUsername())
             .password(passwordEncoder.encode(requestDto.getPassword()))
+            .masterPassword(passwordEncoder.encode(requestDto.getMasterPassword()))
             .email(requestDto.getEmail())
             .phone(requestDto.getPhone())
             .role(RoleEnum.USER)

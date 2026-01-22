@@ -34,6 +34,9 @@ public class User extends DateAuditing {
    @Column(nullable = false)
    private String password;
 
+   @Column
+   private String masterPassword;
+
    @Column(nullable = false, unique = true)
    private String email;
 

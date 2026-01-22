@@ -21,6 +21,9 @@ public class RegisterRequestDto {
    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$", message = MessageKey.ErrorMessage.Valid.PASSWORD)
    private String password;
 
+   @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$", message = MessageKey.ErrorMessage.Valid.MASTER_PASSWORD)
+   private String masterPassword;
+
    @Email(message = MessageKey.ErrorMessage.Valid.EMAIL)
    private String email;
 
