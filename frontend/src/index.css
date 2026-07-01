@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+/* Custom utilities */
+@layer components {
+  .btn-primary {
+    @apply bg-blue-600 text-white font-medium py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center gap-2;
+  }
+
+  .btn-secondary {
+    @apply bg-gray-100 text-gray-800 font-medium py-3 px-6 rounded-lg hover:bg-gray-200 transition-colors duration-200 flex items-center justify-center gap-2;
+  }
+
+  .btn-outline {
+    @apply bg-transparent border border-gray-200 text-gray-800 font-medium py-3 px-6 rounded-lg hover:bg-gray-50 transition-colors duration-200 flex items-center justify-center gap-2;
+  }
+
+  .form-input {
+    @apply w-full px-4 py-3 border border-gray-200 rounded-lg bg-white text-gray-800 placeholder-gray-400 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition-all duration-200;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-gray-600 mb-1;
+  }
+}
